@@ -48,11 +48,6 @@ namespace MyBank.API
 
             services.AddScoped<IRatesService, RatesService>();
 
-            
-
-
-            services.AddSingleton<IBaseCurrency, BaseCurrency>();
-
 
             services.AddControllers();
             services.AddSwaggerGen();

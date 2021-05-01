@@ -10,27 +10,30 @@ namespace MyBank.API.Services
     public class RatesService : IRatesService
     {
         
-        private readonly IBaseCurrency baseCurrency;
+        
         private readonly IConfiguration configuration;
         private readonly IAPIService apiService;
+        private readonly string baseCCY;
 
-        public RatesService(IBaseCurrency baseCurrency,IConfiguration configuration,IAPIService apiService)
+        public RatesService(IConfiguration configuration,IAPIService apiService)
         {
 
-            this.baseCurrency = baseCurrency;
+            this.baseCCY  = configuration.GetValue<string>("MyBankSettings:BaseCCY");
+
             this.configuration = configuration;
+            
             this.apiService = apiService;
         }
 
         public async Task<decimal> GetLatestRateForCCYAsync(string ccy)
         {
-            if (ccy == this.baseCurrency.Currency) return 1;
+            if (ccy == this.baseCCY) return 1;
 
             var url = this.configuration.GetValue<string>("MyBankSettings:RatesUrl"); 
 
             var builder = new UriBuilder(url);
 
-            builder.Query = $"base={this.baseCurrency.Currency}&symbols={ccy}";
+            builder.Query = $"base={this.baseCCY}&symbols={ccy}";
             
             var res =  await this.apiService.GetAsync<ExchangeRate>(builder);
 

@@ -3,9 +3,12 @@ using Microsoft.Extensions.Configuration;
 using Moq;
 using MyBank.API.Infrastructure;
 using MyBank.API.Services;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace MyBank.Tests
@@ -42,11 +45,21 @@ namespace MyBank.Tests
         [Fact]
         public async void isRateOneForSameBaseAndSymbol() {
 
-            var mock = new Mock<IBaseCurrency>(); 
+            
+            IConfiguration configuration = new ConfigurationBuilder()
 
-            mock.Setup(x=>x.Currency).Returns("GBP");
+                .AddInMemoryCollection(new Dictionary<string, string> {
 
-            var rs = new RatesService(mock.Object,null,null); 
+                    {"MyBankSettings:BaseCCY", "GBP" }
+    
+                })
+
+            .Build();
+
+            var mockRemoteAPI = new Mock<IAPIService>(); 
+
+
+            var rs = new RatesService(configuration,mockRemoteAPI.Object); 
 
             var res = await rs.GetLatestRateForCCYAsync("GBP");
 
@@ -60,23 +73,32 @@ namespace MyBank.Tests
         [Fact]
         public async void isRateObtainedForDifferentBaseAndSymbol() {
 
-            var mockCCY = new Mock<IBaseCurrency>(); 
 
-            mockCCY.Setup(x=>x.Currency).Returns("GBP");
+            IConfiguration configuration = new ConfigurationBuilder()
 
-            var mockRemoteAPI = new Mock<IHttpClientFactory>(); 
+                .AddInMemoryCollection(new Dictionary<string, string> {
 
-            mockCCY.Setup(x=>x.Currency).Returns("GBP");
+                    {"MyBankSettings:BaseCCY", "EUR" },
+                    {"MyBankSettings:RatesUrl","testurl" }
+    
+                })
 
-            var mockConfiguration = new Mock<IConfiguration>(); 
+            .Build();
 
-            mockConfiguration.Setup(m=>m.GetValue<string>(It.Is<string>(i=>i == "MyBankSettings:RatesUrl" ))).Returns("testurl");
 
-            //var rs = new RatesService(mockRemoteAPI.Object,mockCCY.Object,mockConfiguration.Object); 
+            var mockRemoteAPI = new Mock<IAPIService>(); 
 
-            //var res = await rs.GetLatestRateForCCYAsync("GBP");
+            var rateDictionary = new Dictionary<string,decimal>() { {"EUR",0.75m } };
 
-          // res.Should().Be(1);
+            var exRate = new ExchangeRate() {Rates = rateDictionary };
+
+            mockRemoteAPI.Setup(m=>m.GetAsync<ExchangeRate>(It.IsAny<UriBuilder>())).Returns(Task.FromResult(exRate));
+
+            var rs = new RatesService(configuration,mockRemoteAPI.Object); 
+
+            var res = await rs.GetLatestRateForCCYAsync("GBP");
+
+           res.Should().Be(0.75m);
 
         }
 
