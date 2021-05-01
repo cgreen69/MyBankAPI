@@ -46,7 +46,7 @@ namespace MyBank.Tests
         }
 
         [Fact]
-        public async void isRateOneForSameBaseAndSymbol() {
+        public async void IsRateOneForSameBaseAndSymbol() {
 
             
             IConfiguration configuration = new ConfigurationBuilder()
@@ -74,7 +74,7 @@ namespace MyBank.Tests
         
 
         [Fact]
-        public async void isRateObtainedForDifferentBaseAndSymbol() {
+        public async void IsRateObtainedForDifferentBaseAndSymbol() {
 
 
             IConfiguration configuration = new ConfigurationBuilder()

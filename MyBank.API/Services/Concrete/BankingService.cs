@@ -17,6 +17,7 @@ namespace MyBank.API.Services.Concrete
         private readonly ITransactionRepository transRepo;
         private readonly IFXService ratesService;
         private readonly ILogger<BankingService> logger;
+        private const int MaximumAmount = 50000;
 
         public BankingService(ITransactionRepository transRepo, IFXService ratesService, ILogger<BankingService> logger)
         {
@@ -37,6 +38,8 @@ namespace MyBank.API.Services.Concrete
         {
 
             if (trans.Amount <= 0) throw new Exception("Unable to process transactions with zero or negative values");
+
+            if (trans.Amount > 50000) throw new Exception($"Maximum amount of {MaximumAmount} exceeded");
 
             if (trans.Ccy is null)
             {
@@ -63,7 +66,8 @@ namespace MyBank.API.Services.Concrete
                 Balance = currentBalance += pendingAmount
             };
 
-            
+            if (fullTransaction.Balance < 0) throw new Exception("bank funds cannot be negative");
+
             this.logger.LogInformation($"saving transaction - {fullTransaction}");
 
             await transRepo.InsertAsync(fullTransaction);
