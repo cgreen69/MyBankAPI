@@ -44,7 +44,14 @@ namespace MyBank.API
             //services.AddSingleton<ILogger>(logger);
             services.SetupInfrastructure(Configuration);
 
+            services.AddScoped<IAPIService, APIService>();
+
             services.AddScoped<IRatesService, RatesService>();
+
+            
+
+
+            services.AddSingleton<IBaseCurrency, BaseCurrency>();
 
 
             services.AddControllers();

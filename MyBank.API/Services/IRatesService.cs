@@ -5,6 +5,6 @@ namespace MyBank.API.Services
     public interface IRatesService
     {
 
-        Task<decimal> GetLatestRateForCCYPairAsync(string ccy);
+        Task<decimal> GetLatestRateForCCYAsync(string ccy);
     }
 }

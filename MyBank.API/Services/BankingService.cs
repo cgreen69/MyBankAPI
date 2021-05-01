@@ -35,7 +35,7 @@ namespace WebApi.Services
         public async Task<bool> ProcessTransactionAsync(ITransactionRequest trans) {
 
 
-             var latestRate = await this.ratesService.GetLatestRateForCCYPairAsync(trans.Ccy);
+             var latestRate = await this.ratesService.GetLatestRateForCCYAsync(trans.Ccy);
              
              var rateAdjustedAmount = trans.Amount * latestRate; 
 
