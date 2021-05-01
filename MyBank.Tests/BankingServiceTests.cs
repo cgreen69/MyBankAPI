@@ -24,7 +24,7 @@ namespace MyBank.Tests
 
             var fx = new Mock<IFXService>();
 
-            fx.Setup(f=>f.GetLatestRateForCCYAsync(It.Is<string>(s=>s=="USD"))).Returns(Task.FromResult<decimal>(.8m));
+            fx.Setup(f=>f.GetLatestRateForCCYAsync(It.Is<string>(s=>s=="USD"))).Returns(Task.FromResult<decimal>(1.2m));
 
             var tr = new Mock<ITransactionRepository>();
 
@@ -40,7 +40,7 @@ namespace MyBank.Tests
 
             await bs.ProcessTransactionAsync(trans.Object);
 
-            tr.Verify(t=>t.InsertAsync(It.IsAny<ITransaction>()),Times.Once);
+            tr.Verify(t=>t.InsertAsync(It.Is<ITransaction>(t=> Math.Round(t.Amount,2) == 833.33m)),Times.Once);
             
 
 

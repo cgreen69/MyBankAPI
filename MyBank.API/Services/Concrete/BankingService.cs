@@ -61,7 +61,7 @@ namespace MyBank.API.Services.Concrete
             var fullTransaction = new Transaction()
             {
                 Date = DateTime.UtcNow,
-                Description = trans.TransactionType == TransactionType.Deposit ? "deposit" : "withdrawal",
+                Description = Enum.GetName(typeof(TransactionType),trans.TransactionType) + (latestRate==1 ? string.Empty : $"fx rate {latestRate} applied to {trans.Amount}"),
                 Amount = pendingAmount,
                 Balance = currentBalance += pendingAmount
             };
