@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBank.API", "MyBank.API.csproj", "{F3C04754-E1B6-4014-8849-DF21D2C19C46}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBank.Tests", "..\MyBank.Tests\MyBank.Tests.csproj", "{F063C76D-10F3-441D-BDDB-AA48A4833CDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3C04754-E1B6-4014-8849-DF21D2C19C46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3C04754-E1B6-4014-8849-DF21D2C19C46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3C04754-E1B6-4014-8849-DF21D2C19C46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3C04754-E1B6-4014-8849-DF21D2C19C46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F063C76D-10F3-441D-BDDB-AA48A4833CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F063C76D-10F3-441D-BDDB-AA48A4833CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F063C76D-10F3-441D-BDDB-AA48A4833CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F063C76D-10F3-441D-BDDB-AA48A4833CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA768477-B116-4FC6-8E9C-68E803BF152E}
+	EndGlobalSection
+EndGlobal
