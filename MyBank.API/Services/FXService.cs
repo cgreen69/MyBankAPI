@@ -20,6 +20,11 @@ namespace MyBank.API.Services
 
             this.baseCCY  = configuration.GetValue<string>("MyBankSettings:BaseCCY");
 
+            if (this.baseCCY is null) {
+
+                throw new ArgumentNullException(nameof(this.baseCCY));
+            }
+
             this.configuration = configuration;
             
             this.apiService = apiService;

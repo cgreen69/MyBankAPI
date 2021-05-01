@@ -23,11 +23,13 @@ namespace MyBank.API.Repositories
 
         public async Task<IEnumerable<ITransaction>> GetTransactionsAsync()
         {
-            const string query = "select * from [transaction]";
+            const string query = "select * from [transaction] order by [date] ASC";
 
             logger.LogInformation("getting transactions");
 
-            await using var conn = new SqlConnection(_connectionString);
+            await using var conn = new SqlConnection(_connectionString);  
+
+
 
             conn.Open();
 
