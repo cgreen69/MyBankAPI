@@ -46,7 +46,7 @@ namespace MyBank.API
 
             services.AddScoped<IAPIService, APIService>();
 
-            services.AddScoped<IRatesService, RatesService>();
+            services.AddScoped<IFXService, FXService>();
 
 
             services.AddControllers();

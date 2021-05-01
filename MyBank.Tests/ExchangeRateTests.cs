@@ -59,7 +59,7 @@ namespace MyBank.Tests
             var mockRemoteAPI = new Mock<IAPIService>(); 
 
 
-            var rs = new RatesService(configuration,mockRemoteAPI.Object); 
+            var rs = new FXService(configuration,mockRemoteAPI.Object); 
 
             var res = await rs.GetLatestRateForCCYAsync("GBP");
 
@@ -94,7 +94,7 @@ namespace MyBank.Tests
 
             mockRemoteAPI.Setup(m=>m.GetAsync<ExchangeRate>(It.IsAny<UriBuilder>())).Returns(Task.FromResult(exRate));
 
-            var rs = new RatesService(configuration,mockRemoteAPI.Object); 
+            var rs = new FXService(configuration,mockRemoteAPI.Object); 
 
             var res = await rs.GetLatestRateForCCYAsync("GBP");
 

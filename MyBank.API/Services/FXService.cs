@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyBank.API.Services
 {
-    //  https://api.ratesapi.io/api/latest?base=USD&symbols=GBP
-    public class RatesService : IRatesService
+    
+    public class FXService : IFXService
     {
         
         
@@ -15,7 +15,7 @@ namespace MyBank.API.Services
         private readonly IAPIService apiService;
         private readonly string baseCCY;
 
-        public RatesService(IConfiguration configuration,IAPIService apiService)
+        public FXService(IConfiguration configuration,IAPIService apiService)
         {
 
             this.baseCCY  = configuration.GetValue<string>("MyBankSettings:BaseCCY");

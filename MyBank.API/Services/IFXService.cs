@@ -2,7 +2,7 @@
 
 namespace MyBank.API.Services
 {
-    public interface IRatesService
+    public interface IFXService
     {
 
         Task<decimal> GetLatestRateForCCYAsync(string ccy);

@@ -16,9 +16,9 @@ namespace WebApi.Services
 
 
         private ITransactionRepository transRepo { get; }
-        public IRatesService ratesService { get; }
+        public IFXService ratesService { get; }
 
-        public BankingService(ITransactionRepository transRepo,IRatesService ratesService)
+        public BankingService(ITransactionRepository transRepo,IFXService ratesService)
         {
             this.transRepo = transRepo;
             this.ratesService = ratesService;
