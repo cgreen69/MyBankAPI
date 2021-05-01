@@ -29,18 +29,14 @@ namespace MyBank.API.Repositories
 
             await using var conn = new SqlConnection(_connectionString);  
 
-
-
             conn.Open();
-
-            //var values = new { UserId = Convert.ToInt32(userId), ClientId = Convert.ToInt32(clientId)};
 
             var result = await conn.QueryAsync<Transaction>(query, commandType: CommandType.Text);
 
             return result;
         }
 
-        public async Task<decimal> GetCurrentBalance() {
+        public async Task<decimal> GetCurrentBalanceAsync() {
 
             const string query = "select top 1 balance from [transaction] order by [date] DESC";
 
@@ -59,7 +55,6 @@ namespace MyBank.API.Repositories
 
         public async Task<bool> InsertAsync(ITransaction transaction)
         {
-            logger.LogInformation("inserting transaction");
 
             string query = $"insert into [transaction] ([date],description,amount,balance) values ('{transaction.Date.ToString("yyyy-MM-dd HH:mm:ss.fff")}','{transaction.Description}',{transaction.Amount},{transaction.Balance})";
 
@@ -68,6 +63,8 @@ namespace MyBank.API.Repositories
             conn.Open();
 
             await conn.ExecuteAsync(query, commandType: CommandType.Text);
+
+            logger.LogInformation("save successful");
 
             return true;
         }

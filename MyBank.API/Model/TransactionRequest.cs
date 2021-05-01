@@ -1,7 +1,6 @@
 ﻿
 
 using MyBank.API.Infrastructure;
-using System.Text.Json.Serialization;
 
 namespace MyBank.API.Model
 {

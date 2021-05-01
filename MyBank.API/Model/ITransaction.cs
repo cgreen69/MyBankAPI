@@ -9,6 +9,6 @@ namespace MyBank.API.Model
         DateTime Date { get; set; }
         string Description { get; set; }
         long Id { get; set; }
-        string Name { get; set; }
+        
     }
 }

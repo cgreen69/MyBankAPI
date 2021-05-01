@@ -1,5 +1,4 @@
 ﻿using MyBank.API.Infrastructure;
-using System;
 
 namespace MyBank.API.Model
 {

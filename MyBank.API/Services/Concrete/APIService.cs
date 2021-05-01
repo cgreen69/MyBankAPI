@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MyBank.API.Services.Interface;
+using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MyBank.API.Services
 {
-    public interface IAPIService {
 
-
-            Task<T> GetAsync<T>(UriBuilder builder);
-
-     }
-    
 
     public class APIService : IAPIService 
     {

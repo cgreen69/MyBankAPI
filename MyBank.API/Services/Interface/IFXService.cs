@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace MyBank.API.Services
+namespace MyBank.API.Services.Interface
 {
     public interface IFXService
     {

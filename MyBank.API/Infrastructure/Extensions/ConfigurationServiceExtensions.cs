@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyBank.API.Repositories;
-using MyBank.API.Services;
-using WebApi.Services;
+using MyBank.API.Services.Concrete;
+using MyBank.API.Services.Interface;
 
 namespace MyBank.API.Infrastructure.Extensions
 {

@@ -8,6 +8,6 @@ namespace MyBank.API.Repositories
     {
         Task<IEnumerable<ITransaction>> GetTransactionsAsync();
         Task<bool> InsertAsync(ITransaction transaction);
-        Task<decimal> GetCurrentBalance();
+        Task<decimal> GetCurrentBalanceAsync();
     }
 }
