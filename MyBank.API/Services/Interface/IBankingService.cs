@@ -7,6 +7,6 @@ namespace MyBank.API.Services.Interface
     public interface IBankingService
     {
         Task<IEnumerable<ITransaction>> GetTransactionsAsync();
-        Task<bool> ProcessTransactionAsync(ITransactionRequest trans);
+        Task ProcessTransactionAsync(ITransactionRequest trans);
     }
 }

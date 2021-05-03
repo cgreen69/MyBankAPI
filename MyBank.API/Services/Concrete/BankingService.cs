@@ -34,7 +34,8 @@ namespace MyBank.API.Services.Concrete
             return await transRepo.GetTransactionsAsync();
         }
 
-        public async Task<bool> ProcessTransactionAsync(ITransactionRequest trans)
+
+        public async Task ProcessTransactionAsync(ITransactionRequest trans)
         {
 
             if (trans.Amount <= 0) throw new Exception("Unable to process transactions with zero or negative values");
@@ -48,6 +49,8 @@ namespace MyBank.API.Services.Concrete
             }
 
 
+            var currentBalance = await transRepo.GetCurrentBalanceAsync();
+
             var latestRate = await ratesService.GetLatestRateForCCYAsync(trans.Ccy);
 
             this.logger.LogInformation($"fx rate={latestRate}");
@@ -56,12 +59,10 @@ namespace MyBank.API.Services.Concrete
 
             var pendingAmount = trans.TransactionType == TransactionType.Deposit ? rateAdjustedAmount : rateAdjustedAmount * -1;
 
-            var currentBalance = await transRepo.GetCurrentBalanceAsync();
-
             var fullTransaction = new Transaction()
             {
                 Date = DateTime.UtcNow,
-                Description = Enum.GetName(typeof(TransactionType),trans.TransactionType) + (latestRate==1 ? string.Empty : $"fx rate {latestRate} applied to {trans.Amount}"),
+                Description = Enum.GetName(typeof(TransactionType),trans.TransactionType) + (latestRate==1 ? string.Empty : $" {trans.Amount} {trans.Ccy}@ {latestRate}"),
                 Amount = pendingAmount,
                 Balance = currentBalance += pendingAmount
             };
@@ -72,8 +73,6 @@ namespace MyBank.API.Services.Concrete
 
             await transRepo.InsertAsync(fullTransaction);
 
-
-            return true;
         }
 
     }

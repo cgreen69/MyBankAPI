@@ -53,7 +53,7 @@ namespace MyBank.API.Repositories
             return result.First();
         }
 
-        public async Task<bool> InsertAsync(ITransaction transaction)
+        public async Task InsertAsync(ITransaction transaction)
         {
 
             string query = $"insert into [transaction] ([date],description,amount,balance) values ('{transaction.Date.ToString("yyyy-MM-dd HH:mm:ss.fff")}','{transaction.Description}',{transaction.Amount},{transaction.Balance})";
@@ -65,8 +65,7 @@ namespace MyBank.API.Repositories
             await conn.ExecuteAsync(query, commandType: CommandType.Text);
 
             logger.LogInformation("save successful");
-
-            return true;
+            
         }
     }
 }

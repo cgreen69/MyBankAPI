@@ -61,7 +61,6 @@ namespace MyBank.Tests
 
             var mockRemoteAPI = new Mock<IAPIService>(); 
 
-
             var rs = new FXService(configuration,mockRemoteAPI.Object,this.logger); 
 
             var res = await rs.GetLatestRateForCCYAsync("GBP");

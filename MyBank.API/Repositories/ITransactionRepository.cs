@@ -7,7 +7,7 @@ namespace MyBank.API.Repositories
     public interface ITransactionRepository
     {
         Task<IEnumerable<ITransaction>> GetTransactionsAsync();
-        Task<bool> InsertAsync(ITransaction transaction);
+        Task InsertAsync(ITransaction transaction);
         Task<decimal> GetCurrentBalanceAsync();
     }
 }

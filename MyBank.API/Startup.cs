@@ -38,20 +38,14 @@ namespace MyBank.API
            });
             services.AddHttpClient();
 
-            // serilog configuration set up 
-
-            //var logger = new LoggerConfiguration().ReadFrom.Configuration(Configuration)
-            //    .CreateLogger();
-
-            //services.AddSingleton<ILogger>(logger);
             services.SetupInfrastructure(Configuration);
 
             services.AddScoped<IAPIService, APIService>();
 
             services.AddScoped<IFXService, FXService>();
 
-
             services.AddControllers();
+
             services.AddSwaggerGen();
         }
 
@@ -74,17 +68,6 @@ namespace MyBank.API
             app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
-
-            //  // Enable middleware to serve generated Swagger as a JSON endpoint.
-            //app.UseSwagger();
-
-            //// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            //// specifying the Swagger JSON endpoint.
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Peer Group V1");
-            //});
-
 
             app.UseEndpoints(endpoints =>
             {

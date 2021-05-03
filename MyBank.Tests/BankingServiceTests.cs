@@ -18,9 +18,8 @@ namespace MyBank.Tests
         private readonly ILogger<BankingService> logger = new Mock<ILogger<BankingService>>().Object;
 
         [Fact]
-        public async void DoesSymbolValueCorrectlySetAmount() {
+        public async void DoesAppliedFXRateSetCorrectTransactionAmount() {
 
-             
 
             var fx = new Mock<IFXService>();
 
@@ -48,7 +47,7 @@ namespace MyBank.Tests
 
 
         [Fact]
-        public async void DoesNegativeTransactionThrowException() {
+        public void DoesNegativeTransactionThrowException() {
 
             var bs = new BankingService(null,null,null);
 
@@ -67,7 +66,7 @@ namespace MyBank.Tests
         }
 
         [Fact]
-        public async void CannotHaveNegativeFunds() {
+        public void CannotHaveNegativeFunds() {
 
            
             var fx = new Mock<IFXService>();
@@ -100,9 +99,8 @@ namespace MyBank.Tests
         }
 
         
-        
         [Fact]
-        public async void IsMaximumTransactionAmountEnforced() {
+        public void IsMaximumTransactionAmountEnforced() {
 
             var bs = new BankingService(null,null,null);
 
