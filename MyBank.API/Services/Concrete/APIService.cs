@@ -9,7 +9,7 @@ namespace MyBank.API.Services
 
     public class APIService : IAPIService
     {
-        private IHttpClientFactory clientFactory;
+        private readonly IHttpClientFactory clientFactory;
 
 
         public APIService(IHttpClientFactory clientFactory)

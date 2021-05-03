@@ -40,9 +40,6 @@ namespace MyBank.Tests
             await bs.ProcessTransactionAsync(trans.Object);
 
             tr.Verify(t=>t.InsertAsync(It.Is<ITransaction>(t=> Math.Round(t.Amount,2) == 833.33m)),Times.Once);
-            
-
-
         }
 
 
@@ -68,7 +65,6 @@ namespace MyBank.Tests
         [Fact]
         public void CannotHaveNegativeFunds() {
 
-           
             var fx = new Mock<IFXService>();
 
             fx.Setup(f=>f.GetLatestRateForCCYAsync(It.Is<string>(s=>s=="GBP"))).Returns(Task.FromResult<decimal>(1));
@@ -93,8 +89,7 @@ namespace MyBank.Tests
 
             };
 
-    
-           t.Should().Throw<Exception>().WithMessage("*negative*");
+            t.Should().Throw<Exception>().WithMessage("*negative*");
 
         }
 

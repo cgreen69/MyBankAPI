@@ -2,6 +2,9 @@
 
 namespace MyBank.API.Model
 {
+    /// <summary>
+    /// I represent a transaction, a single entry on a banking statement
+    /// </summary>
     public class Transaction : ITransaction
     {
         public override string ToString()

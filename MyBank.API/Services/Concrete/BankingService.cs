@@ -11,6 +11,9 @@ namespace MyBank.API.Services.Concrete
 {
 
 
+    /// <summary>
+    /// The heart of the application that processes transactions. 
+    /// </summary>
     public class BankingService : IBankingService
     {
 
@@ -30,11 +33,16 @@ namespace MyBank.API.Services.Concrete
 
         public async Task<IEnumerable<ITransaction>> GetTransactionsAsync()
         {
-
             return await transRepo.GetTransactionsAsync();
         }
 
-
+        /// <summary>
+        /// Process the transaction which for now is either a deposit or a withdrawal. This method could be refactored 
+        /// potentially being replaced with for example a transaction factory to reduce branching logic here should transaction types
+        /// increase
+        /// </summary>
+        /// <param name="trans">The requested transaction</param>
+        /// <returns></returns>
         public async Task ProcessTransactionAsync(ITransactionRequest trans)
         {
 
@@ -47,7 +55,6 @@ namespace MyBank.API.Services.Concrete
 
                 throw new ArgumentNullException(nameof(trans.Ccy));
             }
-
 
             var currentBalance = await transRepo.GetCurrentBalanceAsync();
 

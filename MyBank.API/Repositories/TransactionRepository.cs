@@ -10,6 +10,9 @@ using MyBank.API.Model;
 
 namespace MyBank.API.Repositories
 {
+    /// <summary>
+    /// I am responsbile for persisting and retrieving transactions
+    /// </summary>
     public class TransactionRepository : ITransactionRepository
     {
         private readonly string _connectionString;
@@ -56,7 +59,7 @@ namespace MyBank.API.Repositories
         public async Task InsertAsync(ITransaction transaction)
         {
 
-            string query = $"insert into [transaction] ([date],description,amount,balance) values ('{transaction.Date.ToString("yyyy-MM-dd HH:mm:ss.fff")}','{transaction.Description}',{transaction.Amount},{transaction.Balance})";
+            string query = $"insert into [transaction] ([date],description,amount,balance) values ('{transaction.Date:yyyy-MM-dd HH:mm:ss.fff}','{transaction.Description}',{transaction.Amount},{transaction.Balance})";
 
             await using var conn = new SqlConnection(_connectionString);
 

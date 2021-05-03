@@ -41,9 +41,10 @@ namespace MyBank.API.Services.Concrete
 
             var url = configuration.GetValue<string>("MyBankSettings:RatesUrl");
 
-            var builder = new UriBuilder(url);
-
-            builder.Query = $"base={baseCCY}&symbols={ccy}";
+            var builder = new UriBuilder(url)
+            {
+                Query = $"base={baseCCY}&symbols={ccy}"
+            };
 
             this.logger.LogInformation($"Obtaining rate for {this.baseCCY}:{ccy}");
 
